@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Asistente de Revisión: app Android 100% offline para farmacia. Recepción de pedidos (cubetas) e inventario por sectores, con escaneo de códigos de barra e informes PDF/CSV. Sin publicidad ni rastreo.">
+  <meta name="theme-color" content="#00695c">
+  <title>Asistente de Revisión — app Android offline</title>
+  <style>
+    :root {
+      --verde: #00695c;
+      --verde-oscuro: #004d40;
+      --fondo: #f5f8f7;
+      --texto: #1b2b28;
+      --suave: #526662;
+      --borde: #d6e2de;
+      --blanco: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.65;
+      font-size: 17px;
+    }
+    header {
+      background: linear-gradient(145deg, var(--verde), var(--verde-oscuro));
+      color: var(--blanco);
+      padding: 56px 20px 44px;
+      text-align: center;
+    }
+    .icono {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .16);
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+    header h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 8vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 0 auto;
+      max-width: 620px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 1.05rem;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--borde);
+      backdrop-filter: blur(8px);
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 10px 12px;
+    }
+    nav a {
+      color: var(--verde-oscuro);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .92rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    nav a:hover, nav a:focus { background: #e3efeb; }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 12px 20px 56px;
+    }
+    section {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 20px;
+      padding: 26px 22px;
+      margin: 24px 0;
+    }
+    h2 {
+      color: var(--verde-oscuro);
+      margin: 0 0 14px;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+    h3 {
+      color: var(--verde-oscuro);
+      margin: 22px 0 6px;
+      font-size: 1.05rem;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .nota {
+      background: #e8f3ef;
+      border-left: 4px solid var(--verde);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #24433d;
+      font-size: .95rem;
+    }
+    .rejilla {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .dato {
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fbfdfc;
+    }
+    .dato strong { color: var(--verde-oscuro); display: block; }
+    a.enlace { color: var(--verde); font-weight: 600; }
+    footer {
+      background: #10201d;
+      color: rgba(255, 255, 255, .78);
+      text-align: center;
+      padding: 26px 20px;
+      font-size: .86rem;
+    }
+    footer p { margin: 4px 0; }
+    @media (min-width: 700px) {
+      .rejilla { grid-template-columns: repeat(3, 1fr); }
+      section { padding: 32px 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="icono" aria-hidden="true">📦</div>
+    <h1>Asistente de Revisión</h1>
+    <p>App Android 100% offline para farmacia: revisión de recepción de pedidos
+      (cubetas) e inventario por sectores de bodega, con escaneo de códigos de
+      barra e informes PDF/CSV.</p>
+  </header>
+
+  <nav aria-label="Secciones">
+    <ul>
+      <li><a href="#app">La app</a></li>
+      <li><a href="#privacidad">Política de privacidad</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="app">
+      <h2>Recepción de pedidos e inventario, sin internet</h2>
+      <p><strong>Asistente de Revisión</strong> es una herramienta
+        de trabajo para farmacia que cubre dos tareas: revisar la
+        <strong>recepción de pedidos</strong> en cubetas y hacer el
+        <strong>inventario por sectores</strong> de bodega. Se escanea la etiqueta
+        y luego cada caja o producto; la app acumula cantidades, calcula montos y
+        genera un informe listo para enviar. Todo funciona sin conexión.</p>
+
+      <h3>Recepción de pedidos (cubetas)</h3>
+      <ul>
+        <li>Escaneo continuo de códigos de barra con la cámara del teléfono.</li>
+        <li>Acumulación automática: cada lectura repetida suma una unidad.</li>
+        <li>Aviso y confirmación de códigos que no están en el maestro.</li>
+        <li>Cierre de cubeta con total de cajas, productos distintos y monto.</li>
+        <li>Informe PDF y CSV por cubeta, y exportación consolidada de varias.</li>
+      </ul>
+
+      <h3>Inventario por sectores</h3>
+      <ul>
+        <li>Sectores con nombre propio: abrir, cerrar y reabrir.</li>
+        <li>Etiqueta del sector escaneada o escrita, y conteo por etiquetas.</li>
+        <li>Cantidades y montos en pesos chilenos, un sector abierto a la vez.</li>
+        <li>Informe PDF y CSV por sector, con historial y re-cuenta.</li>
+      </ul>
+
+      <h3>En ambas tareas</h3>
+      <ul>
+        <li>Consulta rápida de la ficha de un producto, sin crear nada.</li>
+        <li>Edición de cantidades, ajustes y deshacer.</li>
+        <li>Historial de cubetas y de sectores.</li>
+        <li>Respaldo y restauración del historial en un archivo JSON local.</li>
+      </ul>
+
+      <div class="rejilla">
+        <div class="dato"><strong>100% offline</strong>Ni conexión ni cuenta.</div>
+        <div class="dato"><strong>No interviene con el celular</strong>Ni con los datos del usuario.</div>
+        <div class="dato"><strong>Sin publicidad</strong>Ni rastreo ni analítica.</div>
+      </div>
+      <div class="nota" style="margin-top:14px">
+        Hecha por un profesional farmacéutico para optimizar el tiempo y la
+        eficiencia de la revisión de recepción de pedidos y del inventario de
+        farmacia.
+      </div>
+    </section>
+
+    <section id="privacidad">
+      <h2>Política de privacidad</h2>
+      <p><em>Última actualización: 29 de octubre de 2026.</em></p>
+
+      <h3>1. Resumen</h3>
+      <p><strong>Asistente de Revisión</strong> es una aplicación
+        para farmacia que funciona <strong>100% sin conexión</strong>. No recopila,
+        no transmite y no almacena datos personales en servidores. La información
+        que el usuario registra queda únicamente en el almacenamiento local del
+        teléfono.</p>
+      <p>La app cubre dos usos: la <strong>revisión de recepción de pedidos</strong>
+        (cubetas) y el <strong>inventario por sectores</strong> de bodega
+        (etiquetas, cantidades y montos).</p>
+      <p><strong>A quién está dirigida:</strong> a los adultos que adquieren la
+        aplicación —dueños de farmacia o franquicia— y al personal que ellos
+        autorizan a usarla, además de las personas que la usan temporalmente como
+        testers durante la etapa de prueba en Google Play. La política se aplica
+        por igual a todos: la app no distingue entre usuarios ni crea cuentas, y no
+        trata datos personales de ninguna de estas personas.</p>
+
+      <h3>2. Datos que trata la aplicación</h3>
+      <p>La app guarda en el propio dispositivo:</p>
+      <ul>
+        <li>el nombre del revisor que el usuario escriba en Ajustes;</li>
+        <li>las cubetas, códigos escaneados, cantidades, fechas y notas de revisión;</li>
+        <li>los sectores de inventario, sus etiquetas, cantidades y montos;</li>
+        <li>el maestro de productos con el que se identifican los códigos;</li>
+        <li>los informes PDF/CSV y los respaldos JSON que el usuario genere.</li>
+      </ul>
+      <p>Estos datos <strong>no se envían a servidores del Titular ni a terceros</strong>.
+        La app no tiene cuentas, inicio de sesión, sincronización, publicidad,
+        analítica ni rastreadores, y no declara permiso de Internet.</p>
+      <p>La app <strong>no interviene con el celular ni con los datos del
+        usuario</strong>: no lee ni modifica contactos, mensajes, llamadas, fotos,
+        ubicación, archivos ni aplicaciones del teléfono, salvo los archivos que el
+        propio usuario elige de forma expresa para guardar un informe, un respaldo o
+        importar un CSV.</p>
+
+      <h3>3. Permisos</h3>
+      <ul>
+        <li><strong>Cámara:</strong> solo para leer códigos de barra mientras el usuario
+          mantiene abierta una pantalla de escaneo. Las imágenes no se guardan ni se
+          transmiten; el reconocimiento ocurre en el propio dispositivo. La app declara
+          la cámara como no obligatoria (<code>required=false</code>).</li>
+        <li><strong>Vibración:</strong> aviso táctil opcional al confirmar una lectura.</li>
+        <li><strong>Almacenamiento local / selector de archivos:</strong> solo para
+          guardar los informes y respaldos donde el usuario elija, y para importar
+          un respaldo o un CSV que el usuario seleccione expresamente.</li>
+      </ul>
+
+      <h3>4. Compartir informes</h3>
+      <p>Cuando el usuario pulsa <strong>Compartir</strong>, la app entrega el PDF y/o
+        el CSV al menú nativo de Android para que el usuario elija la aplicación de
+        destino (por ejemplo, WhatsApp o correo). Esa entrega la decide y autoriza el
+        propio usuario. La app no conoce ni controla lo que la aplicación elegida haga
+        después con los archivos.</p>
+
+      <h3>5. Maestro de productos</h3>
+      <p>El maestro de productos viaja <strong>cifrado dentro de la app</strong> y es
+        propiedad del desarrollador. Se descifra solo en memoria para identificar los
+        códigos escaneados; el archivo plano nunca se escribe en el teléfono. El
+        maestro no se comparte con terceros.</p>
+
+      <h3>6. Copias de seguridad del sistema</h3>
+      <p>Si el usuario tiene activada la copia de seguridad de Android, el sistema
+        operativo podría respaldar los datos locales conforme a la configuración de su
+        cuenta. Esa copia es responsabilidad del sistema y no una transmisión realizada
+        por esta aplicación.</p>
+
+      <h3>7. Eliminación de datos</h3>
+      <p>El usuario puede eliminar cubetas desde la propia app, o borrar todos los
+        datos desinstalando la aplicación o limpiando su almacenamiento desde los
+        ajustes de Android. La app no conserva copias en la nube.</p>
+
+      <h3>8. Menores de edad</h3>
+      <p>La app es una herramienta de trabajo para adultos y no está dirigida a
+        menores. No recopila datos de ninguna persona.</p>
+
+      <h3>9. Cambios</h3>
+      <p>Si esta política cambia, se publicará la versión actualizada en esta misma
+        página con su fecha de actualización.</p>
+
+      <div class="nota">
+        Resumen para Play Store: la app <strong>no recopila ni comparte datos</strong>,
+        funciona sin internet y no usa analítica, publicidad ni rastreadores.
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p>Para consultas sobre la app, privacidad o soporte, escribe a:</p>
+      <p><a class="enlace" href="mailto:scojiro+mesa-ayuda@gmail.com">scojiro+mesa-ayuda@gmail.com</a></p>
+      <p class="nota">Asistente de Revisión es un proyecto propietario. El maestro de
+        productos es información comercial confidencial del desarrollador.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 scojiro — Todos los derechos reservados.</p>
+    <p>Proyecto propietario; no se permite copia ni redistribución.</p>
+  </footer>
+</body>
+</html>
