@@ -4,13 +4,108 @@
 > `/home/casa/asistente-revision-site` · rama `main` · remoto
 > `origin` = https://github.com/scojiro/asistente-revision-site ·
 > publicado en https://scojiro.github.io/asistente-revision-site/
-> Última actualización de este archivo: **2026-11-02 15:56 -03**.
+> Última actualización de este archivo: **2026-11-02 17:00 -03**.
 
-## Estado: web v4 publicada — capturas, búsqueda, funciones finas y precio PENDIENTE
+## Estado: web v5 — dos temas (claro/oscuro) y sistema de diseño
 
-Publicado y verificado el 2026-11-02. `index.html` es una sola página
-estática: HTML + CSS propios, **cero JavaScript**, cero frameworks, cero
-fuentes web, cero CSS de terceros.
+Publicada el 2026-11-02. **Solo piel**: mismo HTML de contenido, mismas
+secciones, mismas 9 capturas, mismos textos. Cambió el CSS (inline, en un
+solo `<style>`), se agregó el **botón redondo de tema** (arriba a la derecha,
+luna/sol) y los **2 únicos scripts inline** que lo hacen funcionar.
+
+### Sistema de diseño aplicado (valores exactos)
+
+- Paleta por variables CSS, dos juegos: claro (`--fondo #fbfbf8`,
+  `--verde #0e7a4f`, `--alterna #f3f7f3`) y oscuro
+  (`html[data-tema="oscuro"]`: `--fondo #101815`, `--verde #45c98d`).
+  Ningún componente usa colores sueltos: solo `var(--…)`.
+- Tipografía del sistema (cero fuentes web): h1 `clamp(1.9rem, 5vw, 2.6rem)`,
+  h2 `clamp(1.4rem, 3.5vw, 1.8rem)`, cuerpo 1 rem, leyendas 0.9 rem, párrafos
+  con `max-width: 65ch`.
+- Contenedor 1080 px: `header/section/footer` usan
+  `padding-inline: max(clamp(1rem,4vw,2rem), calc(50% - 540px + clamp(1rem,4vw,2rem)))`,
+  así el contenido queda alineado a 1080 px sin envoltorios extra en el HTML.
+- Secciones a sangre con `padding-block clamp(3rem, 8vw, 5rem)` y alternancia
+  de fondo (`section:nth-of-type(even)` → `--alterna`), sin líneas duras.
+- Tarjetas de captura: superficie, borde 1 px, radio 14 px, padding .6 rem,
+  sombra `0 1px 2px rgba(0,0,0,.06)`; imagen con radio 10 px; hover real
+  (`@media (hover:hover) and (pointer:fine)`) con `translateY(-2px)` y sombra
+  `0 6px 16px rgba(0,0,0,.10)`, transición 180 ms ease-out.
+- `:focus-visible` con contorno verde de 2 px en todo lo interactivo; zonas
+  táctiles ≥ 44 px medidas.
+- `@media (prefers-reduced-motion: reduce)` anula transiciones y el scroll
+  suave.
+- Botón de tema: 44×44 px, `position: fixed; top .9rem; right .9rem`, radio
+  999 px, borde 1 px, fondo superficie, icono `currentColor` de 20 px; la luna
+  se ve en claro y el sol en oscuro solo con CSS (sin JS extra).
+
+### Los 2 scripts (los únicos del sitio)
+
+1. En `<head>`, **antes** del `<style>`: lee `localStorage['tema']`; si no hay
+   elección usa `prefers-color-scheme`; si toca oscuro pone
+   `data-tema="oscuro"` en `<html>` antes de pintar (evita el destello).
+2. Antes de `</body>`: alterna `data-tema` y guarda `claro`/`oscuro` en
+   `localStorage`. `try/catch` en ambos (si `localStorage` está bloqueado, la
+   página sigue en claro).
+
+Sin `src`, sin librerías, sin `${`, sin frameworks, sin fuentes web.
+
+### Verificación medida (2026-11-02 17:00 -03)
+
+- `wc -c index.html` = **24.873 B** (< 40 KB). Las 9 capturas WebP no se
+  tocaron: mismos nombres y mismos md5 que en v4.
+- `grep -c '<script'` = **2**; `boton-tema` = 6; `data-tema` = 7; un solo
+  `<style>`; `loading="lazy"` = 8 (igual que v4).
+- `grep -nE 'fonts.googleapis|fonts.gstatic|cdn\.|https?://[^"]*\.(js|css)'`
+  → **sin resultados**. `grep -nE '\$|CLP|USD|14\.990|14990'` → **sin
+  resultados**. `prontamente disponible` = 1; `Funciones finas` = 1;
+  `1.9.5` = 1; `id="privacidad"` = 1; `mailto:scojiro+mesa-ayuda@gmail.com` = 1.
+- Texto del cuerpo comparado con el de `HEAD` (quitando etiquetas): **idéntico**
+  salvo el emoji 📦 del héroe (decorativo, `aria-hidden`, se retiró por la
+  regla «sin iconos emoji»).
+- Navegador real (Firefox headless) sobre copia local servida por HTTP:
+  - 390 px → `scrollWidth` 378 (sin desborde), galería 2 columnas
+    (tarjeta 167 px), rejilla 1 columna, 9/9 imágenes (720×1409, la novena
+    720×1410).
+  - 768 px → galería 3 columnas (221 px), rejilla 3 columnas, 9/9.
+  - 1280 px → galería 4 columnas (237 px), rejilla 3 columnas, 9/9.
+  - Botón de tema 44×44; enlace de contacto 291×44; ningún objetivo táctil
+    menor de 44 px en el `nav`.
+- Funcional (arnés same-origin con iframes): sin preferencia arranca claro
+  (`fondo rgb(251,251,248)`, luna visible); un clic → `data-tema="oscuro"`,
+  `localStorage.tema="oscuro"`, fondo `rgb(16,24,21)`, sol visible; otro clic
+  → claro; un documento nuevo con la preferencia guardada **arranca ya en
+  oscuro** (anti-destello). Estructura contada en el DOM: 5 secciones, 9
+  capturas, 2 scripts, 4 enlaces de `nav`.
+- Contraste WCAG de los pares principales: claro 14,43:1 (texto/fondo) y
+  5,45:1 (texto suave); verde sobre fondo 5,17:1; oscuro 15,4:1 y 7,93:1;
+  verde oscuro sobre fondo 8,59:1. Todos ≥ 4,5:1.
+- Validador del W3C (`validator.w3.org/nu`, POST del archivo): **0 mensajes**.
+
+> Nota de instrumento: el «9/9 imágenes cargadas» se midió sobre una **copia
+> de QA sin `loading="lazy"`** (el archivo publicado conserva el lazy de v4,
+> 8 de 9). El headless de Firefox no completa la carga diferida de una página
+> larga dentro del mismo `load`, así que contar `naturalWidth` ahí daría un
+> falso negativo; la copia de QA solo elimina el atributo, nada más.
+
+### Desviaciones declaradas (y por qué)
+
+1. **No se agregaron «kickers»** (la etiqueta pequeña sobre cada título de
+   sección que describe el sistema de diseño). Habría exigido **texto nuevo**
+   en el HTML; manda la regla dura «no cambiar textos / solo piel». El estilo
+   queda definido en la lista de componentes por si el dueño autoriza el texto.
+2. **Se retiró el emoji 📦 del héroe** (era decorativo y `aria-hidden`): el
+   sistema prohíbe iconos emoji y deja como únicos iconos los 2 SVG del botón.
+3. Los tres párrafos que traían color en línea (`style="…color:#5c6f6a…"`) y
+   el `margin-top` en línea de la nota pasaron a la clase `.meta` / al CSS,
+   para que ningún color quede fuera de las variables. El texto no cambió.
+
+## Historial: web v4 publicada (capturas, búsqueda, funciones finas, precio pendiente)
+
+Publicado y verificado el 2026-11-02 (estado **histórico**: la v5 lo
+reemplazó). `index.html` era una sola página estática: HTML + CSS propios,
+**cero JavaScript** (hasta la v5), cero frameworks, cero fuentes web, cero CSS
+de terceros.
 
 > **El precio quedó PENDIENTE A PROPÓSITO.** La app está en prueba cerrada y
 > no es pública: la web no muestra ningún monto (ni `$`, ni `CLP`, ni cifras).
@@ -29,9 +124,10 @@ Commits (rama `main`, con el correo noreply del repo):
 (Historial anterior: `de820eb` capturas WebP · `726faa9` web v2 · `689b6fd`
 docs.)
 
-`git ls-remote origin refs/heads/main` = `14d792d1a4679edbe5972ca9c37eab19d6e79df6`
-(igual a local). El commit de este archivo se agrega después; su hash va al
-correo, no aquí.
+`git ls-remote origin refs/heads/main` valía
+`14d792d1a4679edbe5972ca9c37eab19d6e79df6` **al cierre de la v4** (hoy la rama
+va más adelante: verificar con `ls-remote`, no fiarse de este párrafo). El
+commit de este archivo se agrega después; su hash va al correo, no aquí.
 
 ### Qué hay en la página
 
@@ -41,6 +137,8 @@ correo, no aquí.
   pestaña nueva (`target="_blank" rel="noopener"`), sin JS.
   `loading="lazy"` en todas menos la primera (esa eager) y `decoding="async"`
   en todas; `width`/`height` reales en cada una. Enlace «Capturas» en el `nav`.
+  (Las 147 px por tarjeta eran con el CSS de la v4; con el de la v5 son 167 px
+  a 390 px de ancho, misma grilla de 2/3/4 columnas.)
 - Bullet de búsqueda en «En ambas tareas»: «Consulta al instante: teclea el
   código o la descripción y aparece la ficha con su precio, sin escanear.»
 - Subsección **«Funciones finas»**: precio corregido y recordado, alta de
@@ -102,7 +200,7 @@ sha256 de la novena: `6b83d5c6fecad6dc8d7b6256a2ef76c59a01c201c3aaf7c82196e64344
 > verificar la grilla; la verificación válida se hizo con el navegador real
 > sobre la URL publicada, contando `document.images` con `naturalWidth > 0`.
 
-## Tarea futura (cuando la app sea pública en Google Play)
+## Tarea futura (cuando la app sea pública en Google Play) — SIGUE VIGENTE
 
 1. Reemplazar el bloque «prontamente disponible» de `#precio` por el monto
    real (pago único) y **agregar el enlace a la ficha** de Google Play.
@@ -119,7 +217,8 @@ sha256 de la novena: `6b83d5c6fecad6dc8d7b6256a2ef76c59a01c201c3aaf7c82196e64344
 
 - Solo este repo. Nada de `revisor-cubetas`, builds, tags, AAB/APK; **nada de
   emulador ni adb** para las capturas: las aporta el dueño.
-- Cero JavaScript, cero frameworks, cero fuentes web, cero CSS de terceros.
+- JavaScript: **solo** los 2 scripts inline del botón de tema (PASO 2 de la v5).
+  Cero frameworks, cero fuentes web, cero CSS de terceros.
 - **Prohibido publicar montos** mientras la app no sea pública.
 - Capturas: solo las del dueño. Prohibido descargar de internet o retocar
   contenido (recortes sí, retoques no).
