@@ -4,12 +4,107 @@
 > `/home/casa/asistente-revision-site` · rama `main` · remoto
 > `origin` = https://github.com/scojiro/asistente-revision-site ·
 > publicado en https://scojiro.github.io/asistente-revision-site/
-> Última actualización de este archivo: **2026-11-02 17:00 -03**.
+> Última actualización de este archivo: **2026-11-02 17:35 -03**.
 
-## Estado: web v5 — dos temas (claro/oscuro) y sistema de diseño
+## Estado: web v6 — piel de la v4 + modo nocturno (LOOK OFICIAL)
 
-Publicada el 2026-11-02. **Solo piel**: mismo HTML de contenido, mismas
-secciones, mismas 9 capturas, mismos textos. Cambió el CSS (inline, en un
+Publicada el 2026-11-02. **Decisión del dueño**: la v5 se descartó como piel
+(«volver a la piel v4») y este es el look oficial. El `index.html` es otra vez
+el de la v4 (banner verde con degradado, icono de caja, tarjetas blancas
+redondeadas) con **una sola cosa encima**: el sistema de dos temas que la v5
+dejó probado.
+
+- Commit base restaurado: `c3ed6f9:index.html` (v4). El árbol volvió a la v4
+  byte a byte antes de injertar nada (`md5 4279e8c6…`).
+- Se agregó: `<meta name="color-scheme" content="light dark">`, el script
+  anti-destello en `<head>` (antes del `<style>`), el bloque
+  `html[data-tema="oscuro"]` con la paleta oscura, las reglas oscuras de los
+  colores «duros» de la v4, el botón `#boton-tema` (44×44, fijo arriba a la
+  derecha) con sus dos SVG, su script y el bloque
+  `prefers-reduced-motion: reduce`.
+- Los 3 colores en línea (`style="…color:#5c6f6a…"`) pasaron a
+  `.meta` / `.meta.mt14` / `.meta.mtn6` con `color: var(--suave)`. Texto
+  idéntico. Queda **un** `style="margin-top:14px"` en el `div.nota` (es
+  espaciado, no color; estaba en la v4 y se dejó tal cual).
+
+### Paleta oscura (la única novedad visual)
+
+    html[data-tema="oscuro"] {
+      --verde: #4dbfa0; --verde-oscuro: #8fd9c6; --fondo: #101a17;
+      --texto: #e6efeb; --suave: #a3b5af; --borde: #24352f;
+      --blanco: #182320; color-scheme: dark;
+    }
+
+Más los colores duros de la v4 llevados a oscuro: banner
+`linear-gradient(145deg, #0b4f43, #062f28)`, `nav rgba(24,35,32,.96)`,
+`nav a:hover #1d302b`, `.nota #152924/#cfe6dc`, `.dato #1b2a26`,
+`.estado #152924/#8fd9c6`. El pie no se toca (`#10201d` ya era oscuro).
+
+> **Trampa corregida (v6)**: la v4 hereda el color del texto del banner con
+> `color: var(--blanco)`. Al redefinir `--blanco` como superficie oscura
+> (`#182320`), el `h1` del banner quedaba casi negro sobre verde oscuro. Se
+> agregó `color: #ffffff` al `header` solo en tema oscuro. Si alguna vez se
+> cambia `--blanco`, revisar el banner.
+
+### Verificación medida (2026-11-02 17:35 -03)
+
+- `wc -c index.html` = **23.759 B** (< 40 KB; la v4 eran 19.336 B).
+  `grep -c '<script'` = 2 · `boton-tema` = 6 · `data-tema` = 14 · un solo
+  `<style>` · `loading="lazy"` = 8 · 9 capturas.
+- Sin externos (`fonts.googleapis|fonts.gstatic|cdn.|https?://…(js|css)` →
+  nada) y **sin montos** (`\$|CLP|USD|14.990|14990` → nada). «prontamente
+  disponible» = 1. Presentes: 📦, «Funciones finas», `id="privacidad"`,
+  el mailto y «1.9.5 (versionCode 20)».
+- **Texto del cuerpo idéntico a la v4** (7.685 caracteres, comparación
+  ignorando etiquetas): sin una sola diferencia.
+- **`:root` idéntico a la v4**: los 7 valores son los mismos (`--verde
+  #00695c`, `--verde-oscuro #004d40`, `--fondo #f5f8f7`, `--texto #1b2b28`,
+  `--suave #526662`, `--borde #d6e2de`, `--blanco #ffffff`); la única línea
+  agregada es `color-scheme: light`.
+- **Diferencia de píxeles contra la v4** (Firefox headless, mismas capturas):
+  - 390 px: 6.232 px distintos de 2.808.000 (**0,22 %**), en 4 bandas: el
+    botón (y 14-58) y los 3 párrafos `.meta` (color `#5c6f6a` → `#526662`).
+  - 1280 px: 6.254 px distintos de 7.936.000 (**0,08 %**), las mismas causas.
+  - No hay ninguna otra diferencia: el resto es píxel a píxel la v4.
+- Tema oscuro medido en el DOM: `body` fondo `rgb(16, 26, 23)`, texto
+  `rgb(230, 239, 235)`; sección `rgb(24, 35, 32)`; `h2` y `nav a`
+  `rgb(143, 217, 198)`; banner `rgb(11, 79, 67) → rgb(6, 47, 40)`; `.nota
+  rgb(21, 41, 36)`; `.dato rgb(27, 42, 38)`; `.estado rgb(21, 41, 36)` +
+  `rgb(143, 217, 198)`; pie `rgb(16, 32, 29)` (sin cambios).
+- Arnés funcional: arranque sin preferencia → `data-tema=null`, fondo
+  `rgb(245, 248, 247)`; clic → `oscuro`, `localStorage.tema="oscuro"`, sol
+  visible; segundo clic → claro; documento nuevo con la preferencia guardada
+  arranca en oscuro. 5 secciones, 9 capturas, 2 scripts, 4 enlaces de nav.
+- Contraste WCAG (AA ≥ 4,5:1) en ambos temas: claro 13,81 / 14,76 (texto),
+  5,72 / 6,11 (suave), 6,19 / 6,61 (verde), blanco sobre banner 6,61 y 9,83,
+  párrafo del banner 5,51 y 8,01; oscuro 15,15 / 13,78, 8,28 / 7,53, 7,85 /
+  7,13, blanco sobre banner 9,49 y 14,53, párrafo 7,76 y 11,52.
+- Layout: 390 px → `scrollWidth` 378, galería 2 columnas (141 px), rejilla 1;
+  768 → 756, 3 columnas; 1280 → 1.268, 4 columnas. El botón **no se superpone**
+  al `h1`, al párrafo, al icono ni al `nav`: 0 px² de intersección a 390, 768
+  y 1280 (el `h1` empieza en y=166 y el botón termina en y=58).
+- W3C (`validator.w3.org/nu`, POST del archivo): **0 mensajes**.
+
+### Desviación declarada (una)
+
+- **No se aplicó `header { padding-right: 4.6rem }` en móvil** (lo pedía el
+  PASO 2f). Medido: el botón va de y=14 a y=58 y el título empieza en y=166,
+  así que no tapa nada, y el `padding` solo conseguía que el párrafo del
+  banner ocupara una línea más y el banner creciera 28 px (rompiendo «el tema
+  claro idéntico a la v4»). Si el dueño prefiere el hueco, es una línea:
+  `@media (max-width: 700px) { header { padding-right: 4.6rem; } }`.
+- Nota de instrumento: el `theme-color` cambia con el botón (`#00695c` /
+  `#0b201d`), pero el script anti-destello no lo reescribe al cargar, así que
+  en una recarga en oscuro la barra del navegador arranca en verde hasta el
+  primer toque. Es el comportamiento del código entregado, no un fallo del
+  CSS.
+
+## Historial: web v5 (descartada como piel; su sistema de temas es el que usa la v6)
+
+Publicada y luego **descartada por el dueño** (prefirió la piel de la v4).
+Se conserva el commit `40bdd96` por si algún día se quiere retomar; de ahí se
+reutilizaron los dos scripts del tema. **Solo piel**: mismo HTML de contenido,
+mismas secciones, mismas 9 capturas, mismos textos. Cambió el CSS (inline, en un
 solo `<style>`), se agregó el **botón redondo de tema** (arriba a la derecha,
 luna/sol) y los **2 únicos scripts inline** que lo hacen funcionar.
 
@@ -210,15 +305,19 @@ sha256 de la novena: `6b83d5c6fecad6dc8d7b6256a2ef76c59a01c201c3aaf7c82196e64344
 
 ## Pendientes del dueño
 
-1. Revisar la página en su teléfono y en el computador antes de difundirla.
+1. Probar el botón de tema en su teléfono (luna/sol, elección guardada).
 2. Aprobar la redacción del pie de la novena captura.
+3. Decidir si quiere el hueco de 4,6 rem para el botón en móvil (ver
+   «Desviación declarada» de la v6).
 
 ## Reglas para la próxima sesión
 
 - Solo este repo. Nada de `revisor-cubetas`, builds, tags, AAB/APK; **nada de
   emulador ni adb** para las capturas: las aporta el dueño.
-- JavaScript: **solo** los 2 scripts inline del botón de tema (PASO 2 de la v5).
-  Cero frameworks, cero fuentes web, cero CSS de terceros.
+- JavaScript: **solo** los 2 scripts inline del botón de tema. Cero
+  frameworks, cero fuentes web, cero CSS de terceros.
+- **El look oficial es la piel de la v4 + el botón de tema** (v6). No
+  reintroducir el sistema de diseño de la v5 sin autorización del dueño.
 - **Prohibido publicar montos** mientras la app no sea pública.
 - Capturas: solo las del dueño. Prohibido descargar de internet o retocar
   contenido (recortes sí, retoques no).
