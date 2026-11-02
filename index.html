@@ -161,13 +161,17 @@
       line-height: 1.35;
       color: var(--suave);
     }
-    .precio {
-      font-size: 2rem;
-      font-weight: 700;
+    .estado {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: #e8f3ef;
       color: var(--verde-oscuro);
-      margin: 0 0 4px;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .01em;
     }
-    .precio span { font-size: .95rem; font-weight: 600; color: var(--suave); }
     .requisitos { font-size: .9rem; color: var(--suave); }
     @media (min-width: 700px) {
       .rejilla { grid-template-columns: repeat(3, 1fr); }
@@ -284,7 +288,7 @@
         <figure>
           <a href="capturas/2-escaneo.webp" target="_blank" rel="noopener">
             <img src="capturas/2-escaneo.webp" width="720" height="1409"
-              alt="Pantalla de escaneo continuo de cajas" decoding="async">
+              alt="Pantalla de escaneo continuo de cajas" loading="lazy" decoding="async">
           </a>
           <figcaption>Escaneo continuo: cada caja se suma sola.</figcaption>
         </figure>
@@ -334,11 +338,11 @@
         </figure>
         <figure>
           <a href="capturas/9-despliegue-automatico.webp" target="_blank" rel="noopener">
-            <img src="capturas/9-despliegue-automatico.webp" width="720" height="1239"
-              alt="La fila del último producto leído, desplegada con los botones menos y más"
+            <img src="capturas/9-despliegue-automatico.webp" width="720" height="1410"
+              alt="Último producto escaneado desplegado con los botones menos y más y su cantidad"
               loading="lazy" decoding="async">
           </a>
-          <figcaption>El último leído se despliega solo para corregir la cantidad.</figcaption>
+          <figcaption>El último escaneado se despliega solo: corrige la cantidad al toque.</figcaption>
         </figure>
       </div>
       <p style="font-size:.85rem;color:#5c6f6a;margin-top:14px">
@@ -438,8 +442,11 @@
 
     <section id="precio">
       <h2>Precio y disponibilidad</h2>
-      <p class="precio">$14.990 <span>pago único</span></p>
-      <p>Sin suscripción, sin publicidad. Próximamente en Google Play.</p>
+      <p class="estado">Prueba cerrada</p>
+      <p>La app está en prueba cerrada. Llegará a Google Play prontamente.</p>
+      <p><strong>Pago único.</strong> Sin suscripción, sin publicidad.</p>
+      <p><strong>Precio: prontamente disponible</strong> — se verá en la ficha de la app
+        en Google Play.</p>
       <p class="requisitos">Android 7.0 (2016) o superior · ~24 MB · sin internet ni
         permisos de red.</p>
     </section>
