@@ -138,9 +138,46 @@
       font-size: .86rem;
     }
     footer p { margin: 4px 0; }
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 10px;
+      margin-top: 14px;
+    }
+    .galeria figure { margin: 0; }
+    .galeria a { display: block; text-decoration: none; }
+    .galeria img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--borde);
+      box-shadow: 0 1px 3px rgba(16, 32, 29, .12);
+      background: var(--blanco);
+    }
+    .galeria figcaption {
+      margin-top: 6px;
+      font-size: .78rem;
+      line-height: 1.35;
+      color: var(--suave);
+    }
+    .precio {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--verde-oscuro);
+      margin: 0 0 4px;
+    }
+    .precio span { font-size: .95rem; font-weight: 600; color: var(--suave); }
+    .requisitos { font-size: .9rem; color: var(--suave); }
     @media (min-width: 700px) {
       .rejilla { grid-template-columns: repeat(3, 1fr); }
       section { padding: 32px 30px; }
+    }
+    @media (min-width: 768px) {
+      .galeria { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1200px) {
+      .galeria { grid-template-columns: repeat(4, 1fr); }
     }
   </style>
 </head>
@@ -156,6 +193,7 @@
   <nav aria-label="Secciones">
     <ul>
       <li><a href="#app">La app</a></li>
+      <li><a href="#capturas">Capturas</a></li>
       <li><a href="#privacidad">Política de privacidad</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -198,10 +236,21 @@
       <h3>En ambas tareas</h3>
       <ul>
         <li>Consulta rápida de la ficha de un producto, sin crear nada.</li>
+        <li><strong>Consulta al instante:</strong> teclea el código o la descripción y
+          aparece la ficha con su precio, sin escanear.</li>
         <li>Edición de cantidades, ajustes y deshacer.</li>
         <li>Historial de cubetas y de sectores.</li>
         <li>Respaldo y restauración del historial en un archivo JSON local.</li>
         <li>Modo oscuro para bodegas con poca luz (claro, oscuro o según el sistema).</li>
+      </ul>
+
+      <h3>Funciones finas</h3>
+      <ul>
+        <li>Corregir el precio de un producto y dejarlo recordado para las próximas revisiones.</li>
+        <li>Dar de alta un producto nuevo y asociarle su código de barra.</li>
+        <li>Alias: nombrar los productos a tu manera.</li>
+        <li>Lectura óptica de etiquetas cuando el código de barra está dañado.</li>
+        <li>Modo claro y oscuro, o según el sistema.</li>
       </ul>
 
       <div class="rejilla">
@@ -218,6 +267,82 @@
       <p style="font-size:.85rem;color:#5c6f6a;margin-top:14px">
         Los precios que muestra la app son referenciales y no constituyen
         factura ni compromiso de venta.
+      </p>
+    </section>
+
+    <section id="capturas">
+      <h2>Mírala en acción</h2>
+      <p>Pantallas reales de la app, tal como se ven en el teléfono.</p>
+      <div class="galeria">
+        <figure>
+          <a href="capturas/1-detalle-cubeta.webp" target="_blank" rel="noopener">
+            <img src="capturas/1-detalle-cubeta.webp" width="720" height="1409"
+              alt="Detalle de cubeta: cajas, productos y monto total" decoding="async">
+          </a>
+          <figcaption>Cubeta en revisión: cajas, productos y monto al instante.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/2-escaneo.webp" target="_blank" rel="noopener">
+            <img src="capturas/2-escaneo.webp" width="720" height="1409"
+              alt="Pantalla de escaneo continuo de cajas" decoding="async">
+          </a>
+          <figcaption>Escaneo continuo: cada caja se suma sola.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/3-detalle-sector.webp" target="_blank" rel="noopener">
+            <img src="capturas/3-detalle-sector.webp" width="720" height="1409"
+              alt="Detalle de un sector de inventario con su total en pesos"
+              loading="lazy" decoding="async">
+          </a>
+          <figcaption>Sector con su total en pesos.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/4-items-sector.webp" target="_blank" rel="noopener">
+            <img src="capturas/4-items-sector.webp" width="720" height="1409"
+              alt="Ítems contados de un sector, con cantidades corregibles"
+              loading="lazy" decoding="async">
+          </a>
+          <figcaption>Ítems contados, corregibles al toque.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/5-inicio-cubetas.webp" target="_blank" rel="noopener">
+            <img src="capturas/5-inicio-cubetas.webp" width="720" height="1409"
+              alt="Pantalla de inicio con las cubetas del día" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Inicio: tus cubetas del día.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/6-inicio-inventario.webp" target="_blank" rel="noopener">
+            <img src="capturas/6-inicio-inventario.webp" width="720" height="1409"
+              alt="Pantalla de inicio del inventario por sectores" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Inicio: inventario por sectores.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/7-historial-cubetas.webp" target="_blank" rel="noopener">
+            <img src="capturas/7-historial-cubetas.webp" width="720" height="1409"
+              alt="Historial de cubetas con exportación a PDF y CSV" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Historial exportable a PDF y CSV.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/8-extra-nueva-cubeta.webp" target="_blank" rel="noopener">
+            <img src="capturas/8-extra-nueva-cubeta.webp" width="720" height="1409"
+              alt="Crear una cubeta nueva escribiendo o escaneando el código" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Nueva cubeta lista en segundos.</figcaption>
+        </figure>
+        <figure>
+          <a href="capturas/9-despliegue-automatico.webp" target="_blank" rel="noopener">
+            <img src="capturas/9-despliegue-automatico.webp" width="720" height="1239"
+              alt="La fila del último producto leído, desplegada con los botones menos y más"
+              loading="lazy" decoding="async">
+          </a>
+          <figcaption>El último leído se despliega solo para corregir la cantidad.</figcaption>
+        </figure>
+      </div>
+      <p style="font-size:.85rem;color:#5c6f6a;margin-top:14px">
+        Toca una captura para verla en tamaño completo.
       </p>
     </section>
 
@@ -309,6 +434,14 @@
         Resumen para Play Store: la app <strong>no recopila ni comparte datos</strong>,
         funciona sin internet y no usa analítica, publicidad ni rastreadores.
       </div>
+    </section>
+
+    <section id="precio">
+      <h2>Precio y disponibilidad</h2>
+      <p class="precio">$14.990 <span>pago único</span></p>
+      <p>Sin suscripción, sin publicidad. Próximamente en Google Play.</p>
+      <p class="requisitos">Android 7.0 (2016) o superior · ~24 MB · sin internet ni
+        permisos de red.</p>
     </section>
 
     <section id="contacto">
