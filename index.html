@@ -262,9 +262,9 @@
   <header>
     <div class="icono" aria-hidden="true">📦</div>
     <h1>Asistente de Revisión</h1>
-    <p>App Android 100% offline para farmacia: recepción de pedidos (cubetas)
-      e inventario por sectores, con escaneo de códigos de barra e informes
-      PDF/CSV.</p>
+    <p>App Android 100% offline para farmacia: recepción de pedidos (cubetas),
+      inventario por sectores y revisión de diferencias contra el stock del
+      sistema, con escaneo de códigos de barra e informes PDF/CSV.</p>
   </header>
 
   <nav aria-label="Secciones">
@@ -278,65 +278,62 @@
 
   <main>
     <section id="app">
-      <h2>Recepción de pedidos e inventario, sin internet</h2>
-      <p><strong>Asistente de Revisión</strong> es una herramienta de farmacia
-        para dos trabajos del día a día: revisar lo que llega en cada cubeta y
-        contar lo que hay en bodega, por sectores. Se escanea la etiqueta y
-        luego cada caja o producto; la app acumula cantidades, calcula montos y
-        genera un informe listo para enviar. Todo funciona en el teléfono.</p>
+      <h2>Recepción de pedidos, inventario y diferencias, sin internet</h2>
+      <p><strong>Asistente de Revisión</strong> es una herramienta de trabajo
+        para farmacia que funciona 100% sin conexión. Cubre el día a día de la
+        operación en tres pestañas: la recepción de pedidos (cubetas), el
+        inventario por sectores de sala y bodega, y la revisión de diferencias
+        contra el stock del sistema, que se activa en Ajustes con Funciones
+        avanzadas. No requiere cuenta ni inicio de sesión, no incluye
+        publicidad, analítica ni rastreadores y no recopila datos personales:
+        todo queda en el teléfono.</p>
 
       <p class="meta mtn6">
         Versión vigente: 1.9.10 (versionCode 25).
       </p>
 
       <h3>Recepción de pedidos (cubetas)</h3>
+      <p>Se identifica la cubeta con su código, pedido y nota, y luego se escanea
+        el código de cada producto dentro de ella. Los repetidos se acumulan
+        solos y la app mantiene los totales en pesos.</p>
       <ul>
-        <li>Escaneo continuo de códigos de barra con la cámara del teléfono.</li>
-        <li>Código de cubeta escaneado o escrito, incluidos los traspasos con texto libre.</li>
-        <li>El pedido de la última cubeta se recuerda 48 horas y se puede editar.</li>
-        <li>Acumulación automática: cada lectura repetida suma una unidad.</li>
-        <li>Aviso y confirmación de códigos que no están en el maestro.</li>
-        <li>Cierre de cubeta con total de cajas, productos distintos y monto.</li>
-        <li>Informe PDF y CSV por cubeta, y exportación consolidada de varias.</li>
+        <li>Escaneo continuo con cámara o ingreso manual por código interno, descripción o código de barra.</li>
+        <li>Aviso y confirmación de los códigos que no están en el maestro de productos, y consulta de la ficha de un producto sin crear revisión.</li>
+        <li>Edición de líneas: sumar, restar, fijar una cantidad exacta, eliminar y deshacer.</li>
+        <li>Cierre de cubeta con totales de cajas, productos y monto.</li>
+        <li>Informes en PDF y CSV por cubeta, y exportación consolidada de varias.</li>
       </ul>
 
       <h3>Inventario por sectores</h3>
+      <p>Se abre un sector, se escanea o escribe su etiqueta y se registra cada
+        producto; los repetidos suman cantidad y el sector se cierra con su
+        propio informe.</p>
       <ul>
-        <li>Sectores con nombre propio: abrir, cerrar y reabrir.</li>
-        <li>Etiqueta del sector escaneada o escrita, y conteo por etiquetas.</li>
-        <li>Etiquetas de sectores incluidas para imprimir (barra y QR) y pegar en anaqueles.</li>
-        <li>Cantidades y montos en pesos chilenos, un sector abierto a la vez.</li>
-        <li>Informe PDF y CSV por sector, con historial y reconteo.</li>
+        <li>Sectores con nombre propio: abrir, cerrar y reabrir cuando haga falta, con un solo sector abierto a la vez para no mezclar conteos.</li>
+        <li>Etiqueta del sector escaneada o escrita, con aviso si no está registrada.</li>
+        <li>Conteo por etiquetas y cantidades, con montos en pesos chilenos.</li>
+        <li>Informes en PDF y CSV por sector, con precio unitario y subtotal por producto.</li>
       </ul>
 
       <h3>Diferencias de inventario</h3>
       <ul>
         <li>Se activa en Ajustes, en «Funciones avanzadas».</li>
-        <li>Importa el stock del sistema y un listado desde .csv o .xlsx, tal como
-          salen del punto de venta, sin convertirlos.</li>
-        <li>Se puede contar sin stock y cargarlo después.</li>
+        <li>Importa el stock del sistema y un listado a revisar desde archivos .csv o .xlsx tal como salen del punto de venta, sin convertirlos; se puede contar sin stock y cargarlo después.</li>
+        <li>Reimportar el stock reemplaza el anterior conservando su fecha.</li>
         <li>Muestra por producto la diferencia y su monto, con totales de
           faltantes, sobrantes y neto.</li>
         <li>Historial editable, reconteo de solo las diferencias e informes en
           PDF y CSV.</li>
       </ul>
 
-      <h3>En ambas tareas</h3>
+      <h3>En todas las pestañas</h3>
       <ul>
-        <li>Consulta al instante: teclea el código o la descripción y aparece
-          la ficha con su precio, sin crear nada ni escanear.</li>
-        <li>Edición de cantidades, ajustes y deshacer.</li>
-        <li>Historial de cubetas y de sectores.</li>
+        <li>Historial de cubetas, sectores y diferencias, con reapertura y reconteo.</li>
+        <li>Compartir los informes con las aplicaciones que el usuario elija.</li>
+        <li>Sonidos y vibración diferenciados para confirmar lecturas.</li>
         <li>Respaldo y restauración del historial en un archivo JSON local.</li>
-        <li>Modo oscuro para bodegas con poca luz (claro, oscuro o según el sistema).</li>
-      </ul>
-
-      <h3>Funciones finas</h3>
-      <ul>
-        <li>Corregir el precio de un producto y dejarlo recordado para las próximas revisiones.</li>
-        <li>Dar de alta un producto nuevo y asociarle su código de barra.</li>
-        <li>Alias: nombrar los productos a tu manera.</li>
-        <li>Lectura óptica de etiquetas cuando el código de barra está dañado.</li>
+        <li>Actualización del maestro de productos desde un archivo CSV.</li>
+        <li>Modo claro u oscuro, ideal para poca luz.</li>
       </ul>
 
       <div class="rejilla">
@@ -344,15 +341,24 @@
         <div class="dato"><strong>No interviene con el celular</strong>No toca el resto del teléfono: solo la cámara mientras escaneas y los archivos que tú elijas.</div>
         <div class="dato"><strong>Sin publicidad</strong>Ni rastreo ni analítica.</div>
       </div>
-      <div class="nota" style="margin-top:14px">
-        Hecha por un profesional farmacéutico, a partir del trabajo real de
-        revisar pedidos y hacer inventario.
-      </div>
 
       <p class="meta mt14">
         Los precios que muestra la app son referenciales y no constituyen
         factura ni compromiso de venta.
       </p>
+    </section>
+
+    <section id="por-que">
+      <h2>Por qué esta app</h2>
+      <ul>
+        <li>Hecha por un profesional farmacéutico, a partir del trabajo real de revisar pedidos y hacer inventario con la finalidad de optimizar el tiempo y evitar errores por revisiones manuales.</li>
+        <li>Offline por autonomía y respeto a la privacidad: es una herramienta de trabajo, no una fuente de metadatos para usos no autorizados.</li>
+        <li>Sin cuentas ni registros: cada quien la instala y la usa en su propio teléfono.</li>
+      </ul>
+      <p>Es una herramienta para cualquier persona que participe en la recepción
+        de pedidos y el inventario de una farmacia. La app no vende productos, no
+        procesa pagos dentro de la aplicación y no contiene contenido de
+        terceros.</p>
     </section>
 
     <section id="capturas">
