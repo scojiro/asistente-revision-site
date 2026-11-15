@@ -55,17 +55,6 @@
       padding: 56px 20px 44px;
       text-align: center;
     }
-    .icono {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 92px;
-      height: 92px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, .16);
-      font-size: 48px;
-      margin-bottom: 18px;
-    }
     header h1 {
       margin: 0 0 10px;
       font-size: clamp(2rem, 8vw, 3rem);
@@ -260,7 +249,6 @@
 </head>
 <body>
   <header>
-    <div class="icono" aria-hidden="true">📦</div>
     <h1>Asistente de Revisión</h1>
     <p>App Android 100% offline para farmacia: recepción de pedidos (cubetas),
       inventario por sectores y revisión de diferencias contra el stock del
@@ -301,6 +289,8 @@
         <li>Aviso y confirmación de los códigos que no están en el maestro de productos, y consulta de la ficha de un producto sin crear revisión.</li>
         <li>Edición de líneas: sumar, restar, fijar una cantidad exacta, eliminar y deshacer.</li>
         <li>Cierre de cubeta con totales de cajas, productos y monto.</li>
+        <li>«Finalizar e iniciar nueva cubeta»: cierra la actual y abre la
+          siguiente sin pasos intermedios, para encadenar revisiones.</li>
         <li>Informes en PDF y CSV por cubeta, y exportación consolidada de varias.</li>
       </ul>
 
@@ -319,11 +309,28 @@
       <ul>
         <li>Se activa en Ajustes, en «Funciones avanzadas».</li>
         <li>Importa el stock del sistema y un listado a revisar desde archivos .csv o .xlsx tal como salen del punto de venta, sin convertirlos; se puede contar sin stock y cargarlo después.</li>
+        <li>Importación de conteo desde Inventario: carga el CSV de 7 columnas
+          exportado por esta misma app, valida el formato estricto, agrupa y suma
+          los códigos repetidos y calcula los montos en pesos chilenos con el
+          maestro local.</li>
         <li>Reimportar el stock reemplaza el anterior conservando su fecha.</li>
+        <li>Orden por última actualización: lo recién ingresado o editado aparece
+          primero en pantalla, mientras los cálculos y los informes PDF/CSV
+          conservan el orden original.</li>
         <li>Muestra por producto la diferencia y su monto, con totales de
           faltantes, sobrantes y neto.</li>
         <li>Historial editable, reconteo de solo las diferencias e informes en
           PDF y CSV.</li>
+      </ul>
+
+      <h3>Historiales y gestión por lotes</h3>
+      <ul>
+        <li>Selección múltiple en los historiales de Inventario y Diferencias:
+          casillas, «Seleccionar todas», «Quitar todas» y contador de lo elegido.</li>
+        <li>Exportación conjunta de lo seleccionado en PDF y CSV.</li>
+        <li>Eliminación por lotes con doble confirmación y casilla de acción
+          irreversible; el borrado en cascada elimina solo lo seleccionado, con
+          sus líneas, etiquetas e ítems.</li>
       </ul>
 
       <h3>En todas las pestañas</h3>
@@ -550,13 +557,26 @@
       <!-- Resumen para Play Store: la app no recopila ni comparte datos, funciona sin internet y no usa analítica, publicidad ni rastreadores. -->
     </section>
 
+    <!--
+      ESTADO: PRUEBA CERRADA, listo para pasar a producción.
+      Se cambia a producción cuando Google Play apruebe el versionCode 27
+      (v1.9.12) y el dueño decida publicar:
+        1. «Prueba cerrada» → «Disponible en Google Play».
+        2. «La app está en prueba cerrada. Llegará a Google Play pronto.» →
+           «Ya está disponible en Google Play.»
+        3. «El precio se definirá al pasar a producción» → precio real de pago
+           único y enlace a la ficha de Play.
+        4. Revisar «Versión vigente: 1.9.12 (versionCode 27)» en #app.
+      No hay otros cambios pendientes en esta sección.
+    -->
     <section id="precio">
       <h2>Precio y disponibilidad</h2>
       <p class="estado">Prueba cerrada</p>
       <p>La app está en prueba cerrada. Llegará a Google Play pronto.</p>
-      <p><strong>Pago único.</strong> Sin suscripción, sin publicidad.</p>
-      <p><strong>Precio:</strong> disponible pronto. Se verá en la ficha de la
-        app en Google Play.</p>
+      <p><strong>Aplicación de pago.</strong> Compra única, sin suscripción ni
+        publicidad. El precio se definirá al pasar a producción.</p>
+      <p><strong>Precio:</strong> se definirá al pasar a producción y se verá en
+        la ficha de la app en Google Play.</p>
       <p class="requisitos">Android 7.0 (2016) o superior · ~24 MB · sin internet ni
         permisos de red.</p>
     </section>
@@ -571,7 +591,7 @@
   </main>
 
   <footer>
-    <p>© 2026 scojiro. Proyecto propietario: no se permite copia ni redistribución. El maestro de productos es información comercial confidencial.</p>
+    <p>Copyright 2026 scojiro. Proyecto propietario: no se permite copia ni redistribución. El maestro de productos es información comercial confidencial.</p>
   </footer>
   <button id="boton-tema" type="button"
     aria-label="Cambiar entre modo claro y oscuro">

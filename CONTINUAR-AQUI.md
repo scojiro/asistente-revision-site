@@ -1,12 +1,70 @@
-# CONTINUAR-AQUÍ — sitio asistente-revision-site
+# CONTINUAR-AQUÍ: sitio asistente-revision-site
 
 > Archivo de reanudación del SITIO (no de la app). Repo:
 > `/home/casa/asistente-revision-site` · rama `main` · remoto
 > `origin` = https://github.com/scojiro/asistente-revision-site ·
 > publicado en https://scojiro.github.io/asistente-revision-site/
-> Última actualización de este archivo: **2026-11-02 17:35 -03**.
+> Última actualización de este archivo: **2026-11-15**.
 
-## Estado: web v6 — piel de la v4 + modo nocturno (LOOK OFICIAL)
+## Estado actual: app v1.9.12 (versionCode 27) y sitio sincronizado
+
+El sitio está alineado con la app **v1.9.12 (versionCode 27)**, cuyo código
+vive en `revisor-cubetas` (HEAD `7fcd902`) y cuyo release está publicado en
+GitHub:
+
+- Release `v1.9.12` (id `443696021`): APK de **24.732.155 B**, SHA-256
+  `9deb525d377da9b399e8276567fa6ac81b1c27563d9aa2a7e8b9f1dc2c749ed6`.
+- Artefactos de Play (en el repositorio de la app, no en este sitio):
+  `ultima_build/v1.9.12/revisor-cubetas.aab` (**16.543.802 B**) y los archivos
+  de depuración `mapping-27-1.9.12.zip` y `symbols-27-1.9.12.zip`.
+
+### Cambios aplicados a `index.html` (sesión 2026-11-15)
+
+1. **Las cuatro capacidades de la 1.9.12**, en la sección «La app»:
+   - Cubetas: «Finalizar e iniciar nueva cubeta» cierra la actual y abre la
+     siguiente sin pasos intermedios.
+   - Diferencias: importación del conteo exportado desde Inventario (CSV de 7
+     columnas, validación estricta, códigos repetidos agrupados y sumados,
+     montos en pesos chilenos con el maestro local).
+   - Diferencias: orden por última actualización en pantalla, conservando el
+     orden original en cálculos e informes PDF/CSV.
+   - Nueva subsección **«Historiales y gestión por lotes»**: selección múltiple
+     con casillas, «Seleccionar todas» y «Quitar todas», exportación conjunta
+     en PDF y CSV y eliminación por lotes con doble confirmación irreversible.
+2. **Héroe sin ícono decorativo**: se retiró el bloque del paquete y su CSS.
+   El banner queda solo con el título y el párrafo. El resto del look oficial
+   (piel v4 más botón de tema) no cambió.
+3. **Sección `#precio` lista para producción**: declara que es una aplicación
+   de pago, de compra única, cuyo precio se definirá al pasar a producción.
+   No publica montos y no la presenta como de costo cero ni como ya publicada.
+4. **Pie de página**: el símbolo de copyright se reemplazó por la palabra
+   «Copyright» para dejar el HTML sin pictogramas.
+
+### Verificación medida (2026-11-15)
+
+- `wc -c index.html` = **28.247 B**.
+- Un solo `<style>` y los 2 scripts inline del botón de tema.
+- Cero coincidencias de los siete términos prohibidos de la auditoría de
+  doctrina, cero guiones largos y cero pictogramas emoji.
+- «Versión vigente: 1.9.12 (versionCode 27)» presente en `#app`.
+- Sin montos ni cifras de precio.
+- HTML balanceado y cero recursos externos.
+
+### Pendientes de release (manuales del dueño)
+
+1. **Probar la v1.9.12 en un dispositivo físico**: lectura óptica real,
+   importación del CSV de Inventario, eliminación múltiple y «Finalizar e
+   iniciar nueva cubeta».
+2. **Subir a mano el AAB del `versionCode 27`**
+   (`ultima_build/v1.9.12/revisor-cubetas.aab`) a la pista cerrada de Play
+   Console, junto con `mapping-27-1.9.12.txt` y `symbols-27-1.9.12.zip`.
+3. Después de la subida a Play, ejecutar el pase de doctrina en este sitio.
+
+Aprobado el `versionCode 27`, aplicar el interruptor de producción descrito en
+el comentario de `#precio` (etiqueta, frase de disponibilidad, precio real y
+enlace a la ficha de Play).
+
+## Historial: web v6: piel de la v4 + modo nocturno (LOOK OFICIAL)
 
 Publicada el 2026-11-02. **Decisión del dueño**: la v5 se descartó como piel
 («volver a la piel v4») y este es el look oficial. El `index.html` es otra vez
@@ -52,8 +110,8 @@ Más los colores duros de la v4 llevados a oscuro: banner
   `grep -c '<script'` = 2 · `boton-tema` = 6 · `data-tema` = 14 · un solo
   `<style>` · `loading="lazy"` = 8 · 9 capturas.
 - Sin externos (`fonts.googleapis|fonts.gstatic|cdn.|https?://…(js|css)` →
-  nada) y **sin montos** (`\$|CLP|USD|14.990|14990` → nada). «prontamente
-  disponible» = 1. Presentes: 📦, «Funciones finas», `id="privacidad"`,
+  nada) y **sin montos** (`\$|CLP|USD|14.990|14990` → nada). «disponible
+  pronto» = 1. Presentes: el ícono del héroe, «Funciones finas», `id="privacidad"`,
   el mailto y «1.9.5 (versionCode 20)».
 - **Texto del cuerpo idéntico a la v4** (7.685 caracteres, comparación
   ignorando etiquetas): sin una sola diferencia.
@@ -153,10 +211,10 @@ Sin `src`, sin librerías, sin `${`, sin frameworks, sin fuentes web.
   `<style>`; `loading="lazy"` = 8 (igual que v4).
 - `grep -nE 'fonts.googleapis|fonts.gstatic|cdn\.|https?://[^"]*\.(js|css)'`
   → **sin resultados**. `grep -nE '\$|CLP|USD|14\.990|14990'` → **sin
-  resultados**. `prontamente disponible` = 1; `Funciones finas` = 1;
+  resultados**. `disponible pronto` = 1; `Funciones finas` = 1;
   `1.9.5` = 1; `id="privacidad"` = 1; `mailto:scojiro+mesa-ayuda@gmail.com` = 1.
 - Texto del cuerpo comparado con el de `HEAD` (quitando etiquetas): **idéntico**
-  salvo el emoji 📦 del héroe (decorativo, `aria-hidden`, se retiró por la
+  salvo el ícono del héroe (decorativo, `aria-hidden`, se retiró por la
   regla «sin iconos emoji»).
 - Navegador real (Firefox headless) sobre copia local servida por HTTP:
   - 390 px → `scrollWidth` 378 (sin desborde), galería 2 columnas
@@ -189,7 +247,7 @@ Sin `src`, sin librerías, sin `${`, sin frameworks, sin fuentes web.
    sección que describe el sistema de diseño). Habría exigido **texto nuevo**
    en el HTML; manda la regla dura «no cambiar textos / solo piel». El estilo
    queda definido en la lista de componentes por si el dueño autoriza el texto.
-2. **Se retiró el emoji 📦 del héroe** (era decorativo y `aria-hidden`): el
+2. **Se retiró el ícono del héroe** (era decorativo y `aria-hidden`): el
    sistema prohíbe iconos emoji y deja como únicos iconos los 2 SVG del botón.
 3. Los tres párrafos que traían color en línea (`style="…color:#5c6f6a…"`) y
    el `margin-top` en línea de la nota pasaron a la clase `.meta` / al CSS,
@@ -205,7 +263,7 @@ de terceros.
 > **El precio quedó PENDIENTE A PROPÓSITO.** La app está en prueba cerrada y
 > no es pública: la web no muestra ningún monto (ni `$`, ni `CLP`, ni cifras).
 > El único texto sobre dinero es el bloque de la sección «Precio y
-> disponibilidad» con «prontamente disponible». Cuando la app salga a
+> disponibilidad» con «disponible pronto». Cuando la app salga a
 > producción hay que reemplazar ese bloque por el monto real y agregar el
 > enlace a la ficha de Google Play (ver «Tarea futura»).
 
@@ -241,8 +299,8 @@ commit de este archivo se agrega después; su hash va al correo, no aquí.
   modo claro y oscuro.
 - Sección **«Precio y disponibilidad»** (`#precio`) antes de Contacto, con
   etiqueta «Prueba cerrada» y este bloque: «La app está en prueba cerrada.
-  Llegará a Google Play prontamente. Pago único. Sin suscripción, sin
-  publicidad. Precio: prontamente disponible — se verá en la ficha de la app
+  Llegará a Google Play pronto. Pago único. Sin suscripción, sin
+  publicidad. Precio: disponible pronto, se verá en la ficha de la app
   en Google Play.» + requisitos Android 7.0 · ~24 MB · sin internet ni permisos
   de red.
 - Política de privacidad: intacta, sección de la misma página (`#privacidad`),
@@ -277,12 +335,12 @@ sha256 de la novena: `6b83d5c6fecad6dc8d7b6256a2ef76c59a01c201c3aaf7c82196e64344
 ### Verificación medida (2026-11-02 15:56 -03)
 
 - `grep -nE '\$|CLP|USD|14\.990|14990' index.html` → **sin resultados**.
-  `grep -c 'prontamente disponible' index.html` → **1**.
+  `grep -c 'disponible pronto' index.html` → **1**.
 - `grep -c '<script'` = **0**; 9 `<img>`; `loading="lazy"` = 8 (9 − la primera).
 - Markup: parser de Python, sin etiquetas sin cerrar ni desbalanceadas.
 - Publicado: 200; el HTML servido tiene el mismo md5 que el local
   (`4279e8c66b0e9903fd9ede999ad6a73d`); las 9 capturas responden 200 con el
-  mismo peso byte a byte; presentes «prontamente disponible», «Funciones
+  mismo peso byte a byte; presentes «disponible pronto», «Funciones
   finas», «Consulta al instante», `id="capturas"`, `id="precio"`,
   `id="privacidad"` y «1.9.5 (versionCode 20)».
 - Render con navegador real sobre la URL publicada: a 390 px → 2 columnas
@@ -295,12 +353,11 @@ sha256 de la novena: `6b83d5c6fecad6dc8d7b6256a2ef76c59a01c201c3aaf7c82196e64344
 > verificar la grilla; la verificación válida se hizo con el navegador real
 > sobre la URL publicada, contando `document.images` con `naturalWidth > 0`.
 
-## Tarea futura (cuando la app sea pública en Google Play) — SIGUE VIGENTE
+## Tarea futura (cuando la app sea pública en Google Play)
 
-1. Reemplazar el bloque «prontamente disponible» de `#precio` por el monto
+1. Reemplazar el bloque «disponible pronto» de `#precio` por el monto
    real (pago único) y **agregar el enlace a la ficha** de Google Play.
-2. Quitar la etiqueta «Prueba cerrada» y la frase «Llegará a Google Play
-   prontamente».
+2. Quitar la etiqueta «Prueba cerrada» y la frase de llegada a Google Play.
 3. Actualizar este archivo y el correo de cierre.
 
 ## Pendientes del dueño
