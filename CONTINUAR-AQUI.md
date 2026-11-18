@@ -6,21 +6,22 @@
 > publicado en https://scojiro.github.io/asistente-revision-site/
 > Última actualización de este archivo: **2026-11-18**.
 
-## Estado actual: app v1.9.14 (versionCode 29) y sitio sincronizado
+## Estado actual: app v1.9.15 (versionCode 30) y sitio sincronizado
 
-Actualización 2026-11-18: «Versión vigente: 1.9.14 (versionCode 29)» en
-`#app`. En «Inventario por sectores» se precisó que la exportación de la
-tanda completa sale ordenada por sector y hora de toma, con la duración de
-cada sector (desde que se abrió hasta que se cerró) y un resumen de los que
-más demoran. `#precio` quedó intacto; no se agregaron secciones ni se
-rediseñó nada. El pase de doctrina sigue pendiente para después de subir a
-Play.
+Actualización 2026-11-18 (tarde): «Versión vigente: 1.9.15 (versionCode 30)»
+en `#app`. La v1.9.15 es una corrección de compatibilidad con Play Console:
+declara `android.hardware.screen.portrait` como no obligatoria (antes se
+infería obligatoria por el lock de orientación vertical y Play bloqueaba la
+publicación en tablets, computadores y Android XR). La app sigue siendo
+vertical; no hubo cambios de funciones ni de interfaz. `#precio` quedó
+intacto; no se agregaron secciones ni se rediseñó nada. El pase de doctrina
+sigue pendiente para después de subir a Play.
 
-El sitio está alineado con la app **v1.9.14 (versionCode 29)**, cuyo código
+El sitio está alineado con la app **v1.9.15 (versionCode 30)**, cuyo código
 vive en `revisor-cubetas` y cuyos artefactos de Play están en
-`ultima_build/v1.9.14/` (no en este sitio): `revisor-cubetas.aab`,
-`mapping-29-1.9.14.txt` y `symbols-29-1.9.14.zip`. El detalle de la versión
-está en `docs/INFORME-V1.9.14.md` del repositorio de la app.
+`ultima_build/v1.9.15/` (no en este sitio): `revisor-cubetas.aab`,
+`mapping-30-1.9.15.txt` y `symbols-30-1.9.15.zip`. El detalle de la versión
+está en `docs/INFORME-V1.9.15.md` del repositorio de la app.
 
 ### Cambios aplicados a `index.html` (sesión 2026-11-15)
 
@@ -51,20 +52,21 @@ está en `docs/INFORME-V1.9.14.md` del repositorio de la app.
 - Cero coincidencias de los términos prohibidos del sitio (`gratis`,
   `gratuito`, `ya en producción`, `sin costo`, `free`), cero guiones largos y
   cero pictogramas emoji.
-- «Versión vigente: 1.9.14 (versionCode 29)» presente en `#app`.
+- «Versión vigente: 1.9.15 (versionCode 30)» presente en `#app`.
 - Sin montos ni cifras de precio.
 - HTML balanceado y cero recursos externos.
 
 ### Pendientes de release (manuales del dueño)
 
-1. **Probar la v1.9.14 en un dispositivo físico** con
-   `docs/LISTA-VERIFICACION-V1.9.14.md` del repositorio de la app.
-2. **Subir a mano el AAB del `versionCode 29`**
-   (`ultima_build/v1.9.14/revisor-cubetas.aab`) a la pista cerrada de Play
-   Console, junto con `mapping-29-1.9.14.txt` y `symbols-29-1.9.14.zip`.
+1. **Probar la v1.9.15 en un dispositivo físico** con
+   `docs/LISTA-VERIFICACION-V1.9.14.md` del repositorio de la app (sigue
+   vigente: la v1.9.15 no cambió funciones, solo el manifest).
+2. **Subir a mano el AAB del `versionCode 30`**
+   (`ultima_build/v1.9.15/revisor-cubetas.aab`) a la pista cerrada de Play
+   Console, junto con `mapping-30-1.9.15.txt` y `symbols-30-1.9.15.zip`.
 3. Después de la subida a Play, ejecutar el pase de doctrina en este sitio.
 
-Aprobado el `versionCode 29`, aplicar el interruptor de producción descrito en
+Aprobado el `versionCode 30`, aplicar el interruptor de producción descrito en
 el comentario de `#precio` (etiqueta, frase de disponibilidad, precio real y
 enlace a la ficha de Play).
 
