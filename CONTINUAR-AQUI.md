@@ -4,19 +4,23 @@
 > `/home/casa/asistente-revision-site` · rama `main` · remoto
 > `origin` = https://github.com/scojiro/asistente-revision-site ·
 > publicado en https://scojiro.github.io/asistente-revision-site/
-> Última actualización de este archivo: **2026-11-15**.
+> Última actualización de este archivo: **2026-11-18**.
 
-## Estado actual: app v1.9.12 (versionCode 27) y sitio sincronizado
+## Estado actual: app v1.9.14 (versionCode 29) y sitio sincronizado
 
-El sitio está alineado con la app **v1.9.12 (versionCode 27)**, cuyo código
-vive en `revisor-cubetas` (HEAD `7fcd902`) y cuyo release está publicado en
-GitHub:
+Actualización 2026-11-18: «Versión vigente: 1.9.14 (versionCode 29)» en
+`#app`. En «Inventario por sectores» se precisó que la exportación de la
+tanda completa sale ordenada por sector y hora de toma, con la duración de
+cada sector (desde que se abrió hasta que se cerró) y un resumen de los que
+más demoran. `#precio` quedó intacto; no se agregaron secciones ni se
+rediseñó nada. El pase de doctrina sigue pendiente para después de subir a
+Play.
 
-- Release `v1.9.12` (id `443696021`): APK de **24.732.155 B**, SHA-256
-  `9deb525d377da9b399e8276567fa6ac81b1c27563d9aa2a7e8b9f1dc2c749ed6`.
-- Artefactos de Play (en el repositorio de la app, no en este sitio):
-  `ultima_build/v1.9.12/revisor-cubetas.aab` (**16.543.802 B**) y los archivos
-  de depuración `mapping-27-1.9.12.zip` y `symbols-27-1.9.12.zip`.
+El sitio está alineado con la app **v1.9.14 (versionCode 29)**, cuyo código
+vive en `revisor-cubetas` y cuyos artefactos de Play están en
+`ultima_build/v1.9.14/` (no en este sitio): `revisor-cubetas.aab`,
+`mapping-29-1.9.14.txt` y `symbols-29-1.9.14.zip`. El detalle de la versión
+está en `docs/INFORME-V1.9.14.md` del repositorio de la app.
 
 ### Cambios aplicados a `index.html` (sesión 2026-11-15)
 
@@ -40,27 +44,27 @@ GitHub:
 4. **Pie de página**: el símbolo de copyright se reemplazó por la palabra
    «Copyright» para dejar el HTML sin pictogramas.
 
-### Verificación medida (2026-11-15)
+### Verificación medida (2026-11-18)
 
-- `wc -c index.html` = **28.247 B**.
+- `wc -c index.html` = **28.437 B**.
 - Un solo `<style>` y los 2 scripts inline del botón de tema.
-- Cero coincidencias de los siete términos prohibidos de la auditoría de
-  doctrina, cero guiones largos y cero pictogramas emoji.
-- «Versión vigente: 1.9.12 (versionCode 27)» presente en `#app`.
+- Cero coincidencias de los términos prohibidos del sitio (`gratis`,
+  `gratuito`, `ya en producción`, `sin costo`, `free`), cero guiones largos y
+  cero pictogramas emoji.
+- «Versión vigente: 1.9.14 (versionCode 29)» presente en `#app`.
 - Sin montos ni cifras de precio.
 - HTML balanceado y cero recursos externos.
 
 ### Pendientes de release (manuales del dueño)
 
-1. **Probar la v1.9.12 en un dispositivo físico**: lectura óptica real,
-   importación del CSV de Inventario, eliminación múltiple y «Finalizar e
-   iniciar nueva cubeta».
-2. **Subir a mano el AAB del `versionCode 27`**
-   (`ultima_build/v1.9.12/revisor-cubetas.aab`) a la pista cerrada de Play
-   Console, junto con `mapping-27-1.9.12.txt` y `symbols-27-1.9.12.zip`.
+1. **Probar la v1.9.14 en un dispositivo físico** con
+   `docs/LISTA-VERIFICACION-V1.9.14.md` del repositorio de la app.
+2. **Subir a mano el AAB del `versionCode 29`**
+   (`ultima_build/v1.9.14/revisor-cubetas.aab`) a la pista cerrada de Play
+   Console, junto con `mapping-29-1.9.14.txt` y `symbols-29-1.9.14.zip`.
 3. Después de la subida a Play, ejecutar el pase de doctrina en este sitio.
 
-Aprobado el `versionCode 27`, aplicar el interruptor de producción descrito en
+Aprobado el `versionCode 29`, aplicar el interruptor de producción descrito en
 el comentario de `#precio` (etiqueta, frase de disponibilidad, precio real y
 enlace a la ficha de Play).
 
