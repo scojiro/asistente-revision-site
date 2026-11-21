@@ -277,7 +277,7 @@
         todo queda en el teléfono.</p>
 
       <p class="meta mtn6">
-        Versión vigente: 1.9.15 (versionCode 30).
+        Versión vigente: 1.9.16 (versionCode 31).
       </p>
 
       <h3>Recepción de pedidos (cubetas)</h3>
@@ -309,14 +309,16 @@
       <ul>
         <li>Se activa en Ajustes, en «Funciones avanzadas».</li>
         <li>Importa el stock del sistema y un listado a revisar desde archivos .csv o .xlsx tal como salen del punto de venta, sin convertirlos; se puede contar sin stock y cargarlo después.</li>
-        <li>Importación de conteo desde Inventario: carga el CSV de 7 columnas
-          exportado por esta misma app, valida el formato estricto, agrupa y suma
+        <li>Importación de conteo desde Inventario: carga el CSV de 8 columnas
+          exportado por esta misma app (también con «Guardar CSV en el
+          dispositivo»), valida el formato estricto, agrupa y suma
           los códigos repetidos y calcula los montos en pesos chilenos con el
           maestro local.</li>
         <li>Reimportar el stock reemplaza el anterior conservando su fecha.</li>
-        <li>Orden por última actualización: lo recién ingresado o editado aparece
-          primero en pantalla, mientras los cálculos y los informes PDF/CSV
-          conservan el orden original.</li>
+        <li>Orden estable: el listado importado conserva el orden exacto del
+          archivo en pantalla; lo contado fuera del listado queda al final, lo
+          más reciente primero. Los informes PDF/CSV conservan su orden
+          propio.</li>
         <li>Muestra por producto la diferencia y su monto, con totales de
           faltantes, sobrantes y neto.</li>
         <li>Historial editable, reconteo de solo las diferencias e informes en
@@ -559,14 +561,14 @@
 
     <!--
       ESTADO: PRUEBA CERRADA, listo para pasar a producción.
-      Se cambia a producción cuando Google Play apruebe el versionCode 30
-      (v1.9.15) y el dueño decida publicar:
+      Se cambia a producción cuando Google Play apruebe el versionCode 31
+      (v1.9.16) y el dueño decida publicar:
         1. «Prueba cerrada» → «Disponible en Google Play».
         2. «La app está en prueba cerrada. Llegará a Google Play pronto.» →
            «Ya está disponible en Google Play.»
         3. «El precio se definirá al pasar a producción» → precio real de pago
            único y enlace a la ficha de Play.
-        4. Revisar «Versión vigente: 1.9.15 (versionCode 30)» en #app.
+        4. Revisar «Versión vigente: 1.9.16 (versionCode 31)» en #app.
       No hay otros cambios pendientes en esta sección.
     -->
     <section id="precio">
